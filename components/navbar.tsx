@@ -8,10 +8,10 @@ import { useTheme } from "next-themes"
 
 const navLinks = [
   { href: "#services", label: "Services" },
-  { href: "#work", label: "Work" },
-  { href: "#testimonials", label: "Testimonials" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#faq", label: "FAQ" },
+  { href: "#why-us", label: "Why Us" },
+  { href: "#portfolio", label: "Our Work" },
+  { href: "#tech", label: "Tech" },
+  { href: "#contact", label: "Contact" },
 ]
 
 export function Navbar() {
@@ -39,13 +39,12 @@ export function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 w-full z-[60] transition-all duration-500 ${
-        isScrolled 
-          ? "bg-bg/90 backdrop-blur-md border-b border-accent/10" 
+      className={`fixed top-0 w-full z-[60] transition-all duration-500 ${isScrolled
+          ? "bg-bg/90 backdrop-blur-md border-b border-accent/10"
           : "bg-bg/80 backdrop-blur-sm"
-      }`}
+        }`}
     >
-      <nav className="max-w-7xl mx-auto px-5 md:px-12 py-5 flex items-center justify-between">
+      <nav className="w-full px-6 sm:px-10 md:px-16 lg:px-20 xl:px-[6%] 2xl:px-[8%] py-5 flex items-center justify-between">
         <a href="#" className="font-syne font-extrabold text-xl">
           <span className="text-cream">Code</span>
           <span className="text-accent">Motive</span>
@@ -65,7 +64,7 @@ export function Navbar() {
               {link.label}
             </motion.a>
           ))}
-          
+
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -84,7 +83,7 @@ export function Navbar() {
             href="#contact"
             className="group bg-accent text-bg font-dm font-semibold px-5 py-2.5 rounded-lg hover:bg-accent-soft transition-colors flex items-center gap-2"
           >
-            Get a Free Demo
+            Free Consultation
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </motion.a>
         </div>
@@ -97,7 +96,7 @@ export function Navbar() {
           >
             {!mounted ? null : theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
-          
+
           <button
             className="flex flex-col gap-1.5 p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -105,25 +104,25 @@ export function Navbar() {
           >
             <motion.span
               className="w-6 h-0.5 bg-cream block origin-center"
-              animate={{ 
-                rotate: isMobileMenuOpen ? 45 : 0, 
-                y: isMobileMenuOpen ? 8 : 0 
+              animate={{
+                rotate: isMobileMenuOpen ? 45 : 0,
+                y: isMobileMenuOpen ? 8 : 0
               }}
               transition={{ duration: 0.3 }}
             />
             <motion.span
               className="w-6 h-0.5 bg-cream block"
-              animate={{ 
+              animate={{
                 opacity: isMobileMenuOpen ? 0 : 1,
-                scaleX: isMobileMenuOpen ? 0 : 1 
+                scaleX: isMobileMenuOpen ? 0 : 1
               }}
               transition={{ duration: 0.3 }}
             />
             <motion.span
               className="w-6 h-0.5 bg-cream block origin-center"
-              animate={{ 
-                rotate: isMobileMenuOpen ? -45 : 0, 
-                y: isMobileMenuOpen ? -8 : 0 
+              animate={{
+                rotate: isMobileMenuOpen ? -45 : 0,
+                y: isMobileMenuOpen ? -8 : 0
               }}
               transition={{ duration: 0.3 }}
             />
@@ -160,10 +159,10 @@ export function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="bg-accent text-bg font-dm font-semibold px-5 py-3.5 rounded-xl text-center mt-2 flex items-center justify-center gap-2"
               >
-                Get a Free Demo
+                Free Consultation
                 <ArrowRight className="w-4 h-4" />
               </motion.a>
             </div>
