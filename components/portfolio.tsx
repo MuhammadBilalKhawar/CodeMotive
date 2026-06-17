@@ -5,31 +5,37 @@ import { ArrowUpRight } from "lucide-react"
 
 const projects = [
   {
-    title: "AI Lead Generation Pipeline",
+    title: "AI Recruitment Platform",
     tag: "AI Automation",
     description:
-      "Built an automated LinkedIn outreach and follow-up pipeline for a US marketing agency using n8n and OpenAI. Reduced manual prospecting time from 3 hours/day to 20 minutes.",
-    tech: ["n8n", "OpenAI API", "LinkedIn API", "Google Sheets"],
+      "Built a fully automated CV parsing and candidate ranking platform utilizing NLP. Integrated deepfake detection for video interviews to ensure candidate authenticity and streamline hiring.",
+    tech: ["Python", "OpenAI API", "AWS", "PostgreSQL"],
     gradient: "from-[#2A1F0A] via-[#3D2E0F] to-[#2A1F0A]",
     tagColor: "text-amber-400 bg-amber-400/10",
+    link: "https://remote-hire-io.vercel.app/",
+    image: "/portfolio-1.png",
   },
   {
-    title: "Custom Shopify Store — Fashion DTC Brand",
-    tag: "E-commerce",
+    title: "AI Code Review SaaS",
+    tag: "SaaS Product",
     description:
-      "Designed and developed a fully custom Shopify theme for a US direct-to-consumer fashion brand. Included custom product filtering, size guide integration, and mobile-first checkout optimization.",
-    tech: ["Shopify Liquid", "JavaScript", "CSS"],
+      "Developed an LLM-powered SaaS tool for automated pull request reviews. The system achieved over 85% accuracy in catching logical bugs and highlighting security vulnerabilities before deployment.",
+    tech: ["Next.js", "Node.js", "OpenAI API", "GitHub API"],
     gradient: "from-[#0A1A2A] via-[#0F2A3D] to-[#0A1A2A]",
     tagColor: "text-blue-400 bg-blue-400/10",
+    link: "https://codereviewer-five.vercel.app/",
+    image: "/portfolio-2.png",
   },
   {
-    title: "HubSpot CRM Dashboard Integration",
-    tag: "API Integration",
+    title: "AI Interview Evaluation System",
+    tag: "Machine Learning",
     description:
-      "Connected a client's internal operations dashboard to HubSpot CRM via REST API. Sales data, deal stages, and contact records now sync automatically — no manual exports needed.",
-    tech: ["Node.js", "HubSpot API", "REST API", "PostgreSQL"],
+      "Engineered an AI-driven evaluation system using Google Gemini to analyze interview transcripts. It automatically extracts core NLP skills and provides objective, data-backed hiring recommendations.",
+    tech: ["Python", "Google Gemini", "React", "PostgreSQL"],
     gradient: "from-[#0A2A1A] via-[#0F3D2A] to-[#0A2A1A]",
     tagColor: "text-emerald-400 bg-emerald-400/10",
+    link: "https://interview-ai-opal.vercel.app/",
+    image: "/portfolio-3.png",
   },
 ]
 
@@ -56,7 +62,10 @@ export function Portfolio() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <motion.div
+            <motion.a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
               key={project.title}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -67,19 +76,26 @@ export function Portfolio() {
                 delay: index * 0.12
               }}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="group glass rounded-2xl overflow-hidden flex flex-col"
+              className="group glass rounded-2xl overflow-hidden flex flex-col block"
             >
               {/* Card visual header */}
               <div
                 className={`h-44 flex items-end p-5 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}
               >
-                <div className="absolute inset-0 bg-black/20" />
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+                {project.image && (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover object-top opacity-90 group-hover:scale-105 transition-transform duration-500"
+                  />
+                )}
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
+                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0 z-10">
                   <div className="w-9 h-9 rounded-full glass flex items-center justify-center">
                     <ArrowUpRight className="w-4 h-4 text-cream" />
                   </div>
                 </div>
-                <span className={`relative font-dm text-xs font-medium px-3 py-1 rounded-full ${project.tagColor}`}>
+                <span className={`relative font-dm text-xs font-medium px-3 py-1 rounded-full ${project.tagColor} z-10`}>
                   {project.tag}
                 </span>
               </div>
@@ -105,17 +121,17 @@ export function Portfolio() {
                   ))}
                 </div>
 
-                <button
-                  className="font-dm text-sm font-medium text-accent flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300"
+                <span
+                  className="font-dm text-sm font-medium text-accent flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300 mt-auto"
                 >
                   View Project
                   <ArrowUpRight className="w-3.5 h-3.5" />
-                </button>
+                </span>
               </div>
 
               {/* Bottom accent line */}
               <div className="h-0.5 bg-gradient-to-r from-accent to-accent-soft scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-            </motion.div>
+            </motion.a>
           ))}
         </div>
 

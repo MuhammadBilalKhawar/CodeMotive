@@ -4,10 +4,10 @@ import { motion } from "framer-motion"
 
 const techStack = {
   "Languages & Frameworks": [
-    "React", "Next.js", "Node.js", "Python", "Flutter", "React Native",
+    "React", "Next.js", "Node.js", "Python", "Flutter",
   ],
   "Tools & Platforms": [
-    "n8n", "Make.com", "OpenAI API", "Shopify", "AWS", "PostgreSQL", "MongoDB", "Docker",
+    "n8n", "Make.com", "OpenAI API", "AWS", "PostgreSQL",
   ],
 }
 
@@ -17,15 +17,11 @@ const colorMap: Record<string, string> = {
   "Node.js": "text-green-400 border-green-400/20 bg-green-400/5",
   Python: "text-blue-400 border-blue-400/20 bg-blue-400/5",
   Flutter: "text-sky-400 border-sky-400/20 bg-sky-400/5",
-  "React Native": "text-cyan-300 border-cyan-300/20 bg-cyan-300/5",
   "n8n": "text-orange-400 border-orange-400/20 bg-orange-400/5",
   "Make.com": "text-purple-400 border-purple-400/20 bg-purple-400/5",
   "OpenAI API": "text-emerald-400 border-emerald-400/20 bg-emerald-400/5",
-  Shopify: "text-green-300 border-green-300/20 bg-green-300/5",
   AWS: "text-amber-400 border-amber-400/20 bg-amber-400/5",
   PostgreSQL: "text-indigo-400 border-indigo-400/20 bg-indigo-400/5",
-  MongoDB: "text-green-500 border-green-500/20 bg-green-500/5",
-  Docker: "text-blue-300 border-blue-300/20 bg-blue-300/5",
 }
 
 export function TechStack() {

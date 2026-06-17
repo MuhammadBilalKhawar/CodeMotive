@@ -6,8 +6,8 @@ import { Users, Zap, DollarSign, TrendingDown, HeartHandshake } from "lucide-rea
 const reasons = [
   {
     icon: Users,
-    title: "You talk to the engineers",
-    body: "No account managers, no middlemen. The people building your product are the same people on your calls.",
+    title: "Direct communication",
+    body: "No account managers, no middlemen. The engineers building your product are the same people on your calls.",
     number: "01",
   },
   {
@@ -18,7 +18,7 @@ const reasons = [
   },
   {
     icon: DollarSign,
-    title: "Transparent pricing",
+    title: "Transparent fixed pricing",
     body: "You get a fixed quote before we start. No hourly surprises, no scope creep invoices.",
     number: "03",
   },
@@ -27,12 +27,6 @@ const reasons = [
     title: "Startup-friendly rates",
     body: "Senior-level engineering at a fraction of what a US or UK agency charges — without compromising on quality.",
     number: "04",
-  },
-  {
-    icon: HeartHandshake,
-    title: "We stay after launch",
-    body: "Bug fixes, updates, and retainer support available after delivery. We don't disappear when the project is done.",
-    number: "05",
   },
 ]
 
@@ -60,7 +54,7 @@ export function WhyUs() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8">
           {reasons.map((reason, index) => (
             <motion.div
               key={reason.title}
@@ -73,7 +67,7 @@ export function WhyUs() {
                 delay: index * 0.1,
               }}
               whileHover={{ y: -6, transition: { duration: 0.25 } }}
-              className={`group glass rounded-2xl p-8 relative overflow-hidden ${index === 4 ? "md:col-span-2 lg:col-span-1" : ""}`}
+              className="group glass rounded-2xl p-8 relative overflow-hidden"
             >
               {/* Number watermark */}
               <span className="absolute top-4 right-6 font-syne font-extrabold text-6xl text-accent/5 select-none pointer-events-none">

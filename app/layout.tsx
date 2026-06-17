@@ -16,14 +16,14 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'CodeMotive — Premium Web Development & SEO Lahore, Pakistan',
-  description: 'CodeMotive builds high-performance, premium websites and digital experiences for Pakistani businesses. Expert in Next.js, SEO, and results-driven design. Best web developer in Lahore.',
-  keywords: 'CodeMotive, web development Lahore, website design Pakistan, best web developer Lahore, Muhammad Bilal Khawar, professional websites Lahore, SEO Pakistan, Next.js developer Pakistan, high-end portfolio websites',
-  authors: [{ name: 'Muhammad Bilal Khawar' }],
+  title: 'CodeMotive | We Code. You Grow.',
+  description: 'CodeMotive builds high-performance, premium websites and AI-powered software for businesses. We code. You grow. Expert Next.js, SEO, and AI automation.',
+  keywords: 'CodeMotive, web development Lahore, website design Pakistan, best web developer Lahore, AI automation, custom software development, Next.js developer',
+  authors: [{ name: 'CodeMotive Team' }],
   robots: 'index, follow',
   openGraph: {
-    title: 'CodeMotive — Premium Web Development Lahore',
-    description: 'Professional, high-performance websites for Pakistani businesses. See your demo before you pay. Expert SEO and design.',
+    title: 'CodeMotive | We Code. You Grow.',
+    description: 'Professional, high-performance websites and AI-powered software for modern businesses. Fast delivery, transparent pricing.',
     url: 'https://code-motive.dev',
     type: 'website',
     siteName: 'CodeMotive',
@@ -31,11 +31,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CodeMotive — Web Development Lahore',
-    description: 'High-end websites for Pakistani businesses. Free demo before you pay.',
+    title: 'CodeMotive | We Code. You Grow.',
+    description: 'High-end websites and AI software for businesses. Fast delivery, fixed pricing.',
   },
   alternates: {
     canonical: 'https://code-motive.dev',
+  },
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
   },
 }
 

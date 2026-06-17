@@ -40,8 +40,8 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 w-full z-[60] transition-all duration-500 ${isScrolled
-          ? "bg-bg/90 backdrop-blur-md border-b border-accent/10"
-          : "bg-bg/80 backdrop-blur-sm"
+        ? "bg-bg/90 backdrop-blur-md border-b border-accent/10"
+        : "bg-bg/80 backdrop-blur-sm"
         }`}
     >
       <nav className="w-full px-6 sm:px-10 md:px-16 lg:px-20 xl:px-[6%] 2xl:px-[8%] py-5 flex items-center justify-between">

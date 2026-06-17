@@ -51,6 +51,9 @@
   body {
     @apply bg-bg text-cream antialiased transition-colors duration-500;
   }
+  html, body {
+    overflow-x: hidden;
+  }
   html {
     scroll-behavior: smooth;
   }

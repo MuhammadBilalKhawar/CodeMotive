@@ -34,7 +34,7 @@ export function Hero() {
       </div>
 
       {/* Vertical lines */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         <motion.div
           initial={{ scaleY: 0 }} animate={{ scaleY: 1 }}
           transition={{ duration: 1.4, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -65,7 +65,7 @@ export function Hero() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent" />
                 </span>
-                <span className="font-dm text-sm text-accent">Now accepting new clients</span>
+                <span className="font-dm text-sm text-accent font-medium">CodeMotive — We Code. You Grow.</span>
               </div>
             </motion.div>
 
@@ -74,9 +74,8 @@ export function Hero() {
               variants={slideIn}
               className="font-syne font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-6xl 2xl:text-7xl tracking-tight leading-[1.05] mb-8"
             >
-              <span className="block text-cream">We Build AI-Powered</span>
-              <span className="block text-cream">Software for Businesses</span>
-              <span className="block text-accent">That Want to Move Faster</span>
+              <span className="text-cream">We Build AI-Powered Software for Businesses </span>
+              <span className="text-accent">That Want to Move Faster</span>
             </motion.h1>
 
             {/* Subheadline */}
@@ -119,9 +118,9 @@ export function Hero() {
             </motion.div>
 
             {/* Trust line */}
-            <motion.div variants={fadeUp} className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-accent flex-shrink-0" />
-              <span className="font-dm text-sm text-muted">
+            <motion.div variants={fadeUp} className="flex items-start gap-3">
+              <MapPin className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+              <span className="font-dm text-sm text-muted leading-relaxed">
                 Based in Lahore, Pakistan — working with clients globally
               </span>
             </motion.div>
