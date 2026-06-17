@@ -68,9 +68,9 @@ export default function RootLayout({
                 "addressLocality": "Lahore",
                 "addressCountry": "PK"
               },
-              "description": "Professional web development firm in Lahore, Pakistan. Websites, SEO, and digital presence for businesses.",
-              "serviceType": ["Web Development", "SEO", "Website Maintenance"],
-              "areaServed": "Pakistan"
+              "description": "CodeMotive builds high-performance, premium websites and AI-powered software for businesses. We build AI-powered software for businesses that want to move faster.",
+              "serviceType": ["AI Workflow Automation", "Custom Web & Mobile App Development"],
+              "areaServed": "Global"
             })
           }}
         />
