@@ -14,3 +14,12 @@ next.user-config.*
 node_modules
 .next/
 .DS_Store
+# brand kit source files (only selected assets are copied into public/)
+/brand-kit
+*.tsbuildinfo
+/codemotive-brand-kit
+.env
+
+# Playwright
+/test-results
+/playwright-report
