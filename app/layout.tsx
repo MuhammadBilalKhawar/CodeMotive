@@ -1,49 +1,73 @@
-import type { Metadata } from 'next'
-import { Syne, DM_Sans } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
+import { VisitorProvider } from '@/components/visitor-provider'
+import { siteConfig } from '@/config/site'
 import './globals.css'
 
-const syne = Syne({ 
-  subsets: ["latin"],
-  weight: ["800"],
-  variable: "--font-syne"
+// Self-hosted (Latin subset, from Fontsource) so dev and build never depend
+// on fetching from Google Fonts. Montserrat: headings (600/700). Inter: body.
+const montserrat = localFont({
+  src: [
+    { path: './fonts/montserrat-latin-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: './fonts/montserrat-latin-700-normal.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: "--font-montserrat",
+  display: "swap",
 })
 
-const dmSans = DM_Sans({ 
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-dm"
+const inter = localFont({
+  src: './fonts/inter-latin-wght-normal.woff2',
+  weight: '100 900',
+  style: 'normal',
+  variable: "--font-inter",
+  display: "swap",
 })
+
+const description =
+  'Business websites, Shopify stores, integrations and AI automation for businesses in Pakistan and worldwide. Based in Lahore. Fixed quote, clear timeline.'
 
 export const metadata: Metadata = {
-  title: 'CodeMotive | We Code. You Grow.',
-  description: 'CodeMotive builds high-performance, premium websites and AI-powered software for businesses. We code. You grow. Expert Next.js, SEO, and AI automation.',
-  keywords: 'CodeMotive, web development Lahore, website design Pakistan, best web developer Lahore, AI automation, custom software development, Next.js developer',
-  authors: [{ name: 'CodeMotive Team' }],
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} | ${siteConfig.tagline}`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description,
+  authors: [{ name: siteConfig.name }],
   robots: 'index, follow',
   openGraph: {
-    title: 'CodeMotive | We Code. You Grow.',
-    description: 'Professional, high-performance websites and AI-powered software for modern businesses. Fast delivery, transparent pricing.',
-    url: 'https://code-motive.dev',
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
+    description,
+    url: siteConfig.url,
     type: 'website',
-    siteName: 'CodeMotive',
+    siteName: siteConfig.name,
     locale: 'en_PK',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CodeMotive | We Code. You Grow.',
-    description: 'High-end websites and AI software for businesses. Fast delivery, fixed pricing.',
-  },
-  alternates: {
-    canonical: 'https://code-motive.dev',
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
+    description,
   },
   icons: {
-    icon: '/icon.png',
-    apple: '/icon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon-180x180.png', sizes: '180x180' }],
+    other: [{ rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: siteConfig.themeColor }],
+  },
+  manifest: '/site.webmanifest',
+  other: {
+    'msapplication-config': '/browserconfig.xml',
   },
 }
 
-import { ThemeProvider } from '@/components/theme-provider'
+export const viewport: Viewport = {
+  themeColor: siteConfig.themeColor,
+}
 
 export default function RootLayout({
   children,
@@ -51,43 +75,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${dmSans.variable} bg-bg`} suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              "name": "CodeMotive",
-              "founder": "Muhammad Bilal Khawar",
-              "url": "https://code-motive.dev",
-              "email": "hello@code-motive.dev",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Lahore",
-                "addressCountry": "PK"
-              },
-              "description": "CodeMotive builds high-performance, premium websites and AI-powered software for businesses. We build AI-powered software for businesses that want to move faster.",
-              "serviceType": ["AI Workflow Automation", "Custom Web & Mobile App Development"],
-              "areaServed": "Global"
-            })
-          }}
-        />
-      </head>
-
-      <body className="font-dm antialiased bg-bg text-cream overflow-x-hidden" suppressHydrationWarning>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          {children}
-          {process.env.NODE_ENV === 'production' && <Analytics />}
-        </ThemeProvider>
+    <html lang="en" className={`${montserrat.variable} ${inter.variable} bg-forest`}>
+      {/* Browser extensions (e.g. ColorZilla's cz-shortcut-listen) add attributes to
+          <body> before React loads. This only ignores attribute mismatches on <body>
+          itself; its children are still checked. */}
+      <body suppressHydrationWarning className="font-body antialiased bg-neutral text-charcoal overflow-x-hidden">
+        <VisitorProvider>{children}</VisitorProvider>
+        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
 }
-
