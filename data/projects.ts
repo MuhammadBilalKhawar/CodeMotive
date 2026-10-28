@@ -28,18 +28,18 @@ export const defaultProjects: Project[] = [
     shareable: true,
   },
   {
-    // TODO(Bilal): add the client or business name (if they agree), stack and live URL at launch.
+    // TODO(Bilal): confirm the country and add the rest of the stack (back end, database, hosting).
     slug: "label-store-management",
-    title: "Label Store & Management System",
+    title: "Avail Labels: Store & Management System",
     type: "Client project",
-    status: "in-development",
+    status: "live",
     industry: "Printing and labels",
-    country: "Pakistan",
+    country: "United Kingdom",
     services: ["Ecommerce", "Integrations"],
     summary:
-      "An online store for custom labels with a management back office for quotes and orders. In development, launching soon.",
-    stack: [],
-    liveUrl: "",
+      "An online store for printed and plain labels and packaging, with a management back office for quotes and orders.",
+    stack: ["React", "Vite"],
+    liveUrl: "https://www.availlabels.co.uk",
     shareable: true,
   },
   {
