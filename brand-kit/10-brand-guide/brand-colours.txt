@@ -1,0 +1,11 @@
+CODEMOTIVE BRAND COLOURS
+Name           HEX      RGB              CMYK (approx, for print)   Use
+Deep Forest    #0F2D23  15, 45, 35       80, 35, 70, 75             Primary. Backgrounds, C of the mark, headings
+Sage Green     #6B8F7A  107, 143, 122    55, 20, 50, 15             "MOTIVE", accents, rules and dividers
+Mint           #CFE5D7  207, 229, 215    17, 0, 14, 0               Mark on dark backgrounds, soft fills
+Warm Neutral   #F4F1EA  244, 241, 234    3, 3, 7, 0                 Light backgrounds, paper tone
+Charcoal       #1E1E1E  30, 30, 30       0, 0, 0, 90                "CODE", body text
+
+TYPEFACE
+Montserrat (free, Google Fonts). Wordmark: Bold, +4% tracking. Tagline: Medium, wide tracking (+42%).
+All logo files have the text converted to outlines, so they display correctly without the font installed.
