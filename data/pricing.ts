@@ -147,7 +147,7 @@ export const carePlanIds = ["care-basic", "care-plus"]
 export const defaultSettings: PricingSettings = {
   // TODO(Bilal): confirm payment terms and methods.
   paymentTerms: {
-    split: "50% upfront, 50% before launch",
+    split: "50% when you approve the mockup, 50% before launch",
     methods: {
       PKR: "Bank transfer",
       USD: "Payoneer, Wise or bank transfer",

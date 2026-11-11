@@ -125,6 +125,22 @@ export default async function Home() {
 
       <HowItWorks steps={home.steps} />
 
+      <Section tone="white">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+          <SectionHeading
+            eyebrow="Free mockup"
+            title="See your website"
+            accent="before you pay anything"
+            intro="Tell us about your business and we'll design your homepage for free. If you like it, we build the full site at a fixed price and it's live in 1–3 weeks. If you don't, you owe nothing."
+            className="mb-0 md:mb-0"
+          />
+          <Link href="/free-mockup" className={`group ${buttonStyles.primaryOnLight} w-fit shrink-0`}>
+            Get my free mockup
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+          </Link>
+        </div>
+      </Section>
+
       <Section>
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
           <SectionHeading

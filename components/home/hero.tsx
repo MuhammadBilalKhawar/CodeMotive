@@ -28,9 +28,16 @@ export function Hero({ hero, site }: { hero: HomeContent["hero"]; site: SiteInfo
             <span className="eyebrow text-xs max-sm:tracking-[0.14em] text-mint">{site.tagline}</span>
           </p>
 
-          <h1 className="font-heading font-bold text-[2.3rem] leading-[1.08] sm:text-6xl lg:text-[3.6rem] xl:text-[4.1rem] tracking-tight text-white mb-7">
+          <h1 className="font-heading font-bold text-[2.3rem] leading-[1.08] sm:text-6xl lg:text-[3.6rem] xl:text-[4.1rem] tracking-tight text-white mb-5">
             {hero.title} <span className="text-gradient-mint">{hero.titleAccent}</span>
           </h1>
+
+          <p className="flex items-start gap-2 text-sm text-mint/85 max-w-xl mb-7">
+            <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-sage" aria-hidden />
+            <span>
+              <span className="font-semibold text-white">Free homepage mockup first.</span> You pay 50% only once you like it, the rest before launch.
+            </span>
+          </p>
 
           <p className="text-lg md:text-xl text-mint leading-relaxed max-w-xl mb-9">
             {hero.subline}

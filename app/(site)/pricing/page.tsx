@@ -45,6 +45,14 @@ export default async function PricingPage() {
             <PricingCard key={pkg.id} pkg={pkg} />
           ))}
         </div>
+        <div data-reveal className="mt-10 gradient-border gradient-border-light rounded-3xl bg-white p-6 sm:p-7 space-y-2 text-sm text-charcoal/85 leading-relaxed">
+          <p>
+            <strong className="text-forest">How payment works:</strong> 50% when you approve the mockup, 50% before launch. Payments by
+            Payoneer or bank transfer.
+          </p>
+          <p>The timeline starts once we have your deposit and your content (logo, photos, text).</p>
+          <p>One revision round = one list of changes sent together, which we make in one go.</p>
+        </div>
       </Section>
 
       <Section tone="white">
