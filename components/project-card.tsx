@@ -27,7 +27,9 @@ export function ProjectCard({ project }: { project: Project }) {
             <div aria-hidden className="absolute inset-0 bg-grid" />
             <div aria-hidden className="aurora w-72 h-72 -top-24 -right-16" />
             <Hammer className="relative w-8 h-8" aria-hidden />
-            <p className="relative font-heading font-semibold text-sm tracking-wide">Launching soon</p>
+            {inDevelopment && (
+              <p className="relative font-heading font-semibold text-sm tracking-wide">Launching soon</p>
+            )}
           </div>
         )}
         <div className="absolute top-3 left-3 flex flex-wrap gap-2">
@@ -71,7 +73,7 @@ export function ProjectCard({ project }: { project: Project }) {
             rel="noopener noreferrer"
             className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-sage-600 w-fit"
           >
-            View live site<span className="sr-only">: {project.title}</span>
+            {isClient ? "View live site" : "View demo"}<span className="sr-only">: {project.title}</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
           </a>
         ) : (

@@ -2,7 +2,7 @@
 
 Things that can't be done in code. Do them once, then keep them up to date. Use exactly the same name, description, address, phone and logo everywhere, because search engines and AI assistants learn who you are from these listings.
 
-**Use everywhere:** CodeMotive · "CodeMotive is a Lahore-based web development firm that builds business websites, Shopify stores, integrations and AI automation for businesses in Pakistan and worldwide." · Lahore, Pakistan · +92 326 5152747 · admin@code-motive.dev · https://code-motive.dev · logo from `brand-kit/03-social-profile-pictures/`.
+**Use everywhere:** CodeMotive · "CodeMotive is a Lahore-based web development firm that builds business websites, Shopify stores, integrations and AI automation for businesses in Pakistan and worldwide." · Lahore, Pakistan · +92 326 5152747 · team@code-motive.dev · https://code-motive.dev · logo from `brand-kit/03-social-profile-pictures/`.
 
 ## After the first deploy
 

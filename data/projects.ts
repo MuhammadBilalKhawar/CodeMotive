@@ -39,6 +39,12 @@ export const defaultProjects: Project[] = [
     summary:
       "An online store for printed and plain labels and packaging, with a management back office for quotes and orders.",
     stack: ["React", "Vite"],
+    image: {
+      src: "/work/avail-labels.jpg",
+      width: 1200,
+      height: 630,
+      alt: "Avail Labels: plain and printed labels, delivered next day",
+    },
     liveUrl: "https://www.availlabels.co.uk",
     shareable: true,
   },

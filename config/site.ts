@@ -27,7 +27,7 @@ export const siteConfig = {
   summary:
     "CodeMotive is a Lahore-based web development firm that builds business websites, Shopify stores, integrations and AI automation for businesses in Pakistan and worldwide.",
   themeColor: "#0F2D23",
-  email: "admin@code-motive.dev",
+  email: "team@code-motive.dev",
   address: {
     street: fromEnv(process.env.BUSINESS_ADDRESS, ""),
     locality: "Lahore",

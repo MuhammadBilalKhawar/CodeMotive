@@ -22,9 +22,9 @@ const envSchema = z.object({
   GEMINI_MODEL: z.string().default("gemini-3.5-flash-lite"),
 
   RESEND_API_KEY: optional,
-  RESEND_FROM: z.string().default("CodeMotive Website <admin@code-motive.dev>"),
-  RESEND_VISITOR_FROM: z.string().default("Bilal at CodeMotive <admin@code-motive.dev>"),
-  CONTACT_TO_EMAIL: z.string().email().default("admin@code-motive.dev"),
+  RESEND_FROM: z.string().default("CodeMotive Website <team@code-motive.dev>"),
+  RESEND_VISITOR_FROM: z.string().default("Bilal at CodeMotive <team@code-motive.dev>"),
+  CONTACT_TO_EMAIL: z.string().email().default("team@code-motive.dev"),
 
   NEXT_PUBLIC_TURNSTILE_SITE_KEY: optional,
   TURNSTILE_SECRET_KEY: optional,

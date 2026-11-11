@@ -19,7 +19,7 @@ import { pakistanDate } from "@/lib/crm/schemas"
 
 export const defaultBillingSettings: BillingSettings = {
   businessName: "CodeMotive",
-  details: "Lahore, Pakistan\nadmin@code-motive.dev\n+92 326 5152747\ncode-motive.dev",
+  details: "Lahore, Pakistan\nteam@code-motive.dev\n+92 326 5152747\ncode-motive.dev",
   pkrInstructions: "",
   usdInstructions: "",
   quoteValidDays: 14,

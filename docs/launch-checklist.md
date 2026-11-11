@@ -34,7 +34,7 @@ The end-to-end tests build the site with every external service switched off, so
 - ✅ No `href="#"` anywhere; social links come from `config/site.ts` and are hidden when empty
 - ⬜ **Prices confirmed** and saved in `/admin/pricing` (the defaults are still the plan's placeholders)
 - ✅ Address (Lahore, Pakistan) and WhatsApp filled in; founders use monogram avatars (no photos, by decision)
-- 🟡 **Resend:** test lead emails were accepted by Resend. Check both arrived in admin@code-motive.dev (and not in spam), and that `code-motive.dev` shows *Verified* in Resend
+- 🟡 **Resend:** test lead emails were accepted by Resend. Check both arrived in team@code-motive.dev (and not in spam), and that `code-motive.dev` shows *Verified* in Resend
 - ✅ Jira issue created by a live test lead (KAN-30)
 - ⬜ Jira issue from a live `/free-mockup` request (tested only against a stand-in so far)
 - ✅ AI reply: Groq works live; Gemini key works; template fallback covered by tests
