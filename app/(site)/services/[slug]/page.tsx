@@ -104,7 +104,10 @@ export default async function ServicePage({ params }: Props) {
       {hasPublishedPrice && (
         <Section tone="white">
           <SectionHeading eyebrow="Packages" title={service.name} accent="pricing" />
-          <div data-reveal-group className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6 max-w-4xl pt-4">
+          <div
+            data-reveal-group
+            className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6 pt-4 ${pkgs.length > 2 ? "lg:grid-cols-3" : "max-w-4xl"}`}
+          >
             {pkgs.map((pkg) => (
               <PricingCard key={pkg.id} pkg={pkg} />
             ))}

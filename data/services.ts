@@ -187,23 +187,23 @@ export const services: Service[] = [
     contactLabel: "Care plan",
     short: "Hosting, backups, updates, uptime checks and small edits every month.",
     intro:
-      "CodeMotive care plans keep your website online, secure and up to date for a fixed monthly fee, with small edits included on the Plus plan.",
+      "CodeMotive care plans keep your website online, secure and up to date for a fixed monthly fee, with small edits included on Care Plus. Hosting is free for the first year with any website we build.",
     problem:
       "A website needs updates, backups and the odd change. Without someone looking after it, small problems turn into downtime at the worst moment.",
     included: [
-      "Hosting for the site we built, with SSL",
-      "Regular backups",
-      "Security and software updates",
-      "Uptime monitoring",
-      "Small edits each month on the Plus plan",
+      "Hosting with SSL, free for the first year",
+      "Backups and uptime monitoring",
+      "Security updates and a monthly check (Care Basic)",
+      "4 small edits a month and priority support (Care Plus)",
     ],
-    timeline: "Billed monthly, starting the month your website goes live.",
-    packageIds: ["care-basic", "care-plus"],
+    timeline: "Billed monthly from launch. Hosting is free for the first year.",
+    packageIds: ["hosting", "care-basic", "care-plus"],
     projectTag: "Websites",
     faqs: [
       {
         question: "Is a care plan required?",
-        answer: "No. It's optional. You can host the site yourself and ask us for one-off changes when you need them.",
+        answer:
+          "No. It's optional, and the first year of hosting is free with any build. After that you can keep Hosting only, choose a care plan, or move the site to your own hosting. If you leave, we hand over your site files and help you move at no charge.",
       },
       {
         question: "What counts as a small edit?",

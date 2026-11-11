@@ -44,8 +44,8 @@ describe("knowledge block", () => {
   it("says plainly that native mobile apps aren't offered", () => {
     expect(facts).toContain("NOT OFFERED RIGHT NOW: Native mobile apps")
   })
-  it("stays compact (under ~2,500 tokens, roughly 4 characters each)", () => {
-    expect(facts.length / 4).toBeLessThan(2500)
+  it("stays compact (under ~2,750 tokens, roughly 4 characters each)", () => {
+    expect(facts.length / 4).toBeLessThan(2750)
   })
 })
 

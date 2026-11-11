@@ -10,7 +10,7 @@ import { fillFaqs, type FilledFaqs } from "@/lib/cms/faqs"
 
 // Builds the plain-text COMPANY FACTS block for the AI reply from the same
 // data the website renders, so a price changed in the admin reaches the AI
-// automatically. Kept compact (well under ~2,500 tokens).
+// automatically. Kept compact (under ~2,750 tokens).
 
 const priceLine = (pkg: PricingPackage) => {
   const unit = pkg.unit === "monthly" ? " per month" : ""
@@ -83,6 +83,7 @@ export function buildCompanyFacts({
     "",
     `PAYMENT: ${settings.paymentTerms.split}. Pakistan (PKR): ${settings.paymentTerms.methods.PKR}. International (USD): ${settings.paymentTerms.methods.USD}.`,
     `HOSTING: ${settings.hostingNote}`,
+    "CANCELLING AND REFUNDS: no lock-in; cancel hosting or care plans any time with 30 days' notice, and we hand over the site files and help move it to the client's own hosting free. The mockup is free. The 50% deposit is refundable before the build starts; after that it covers work done.",
     `WHAT AFFECTS THE PRICE: ${settings.priceFactors.join("; ")}.`,
     `NOT INCLUDED IN ANY PACKAGE: ${settings.notIncludedAnywhere.join("; ")}.`,
     `FREE HOMEPAGE MOCKUP: businesses can request a free homepage mockup at ${siteConfig.url}/free-mockup; delivered within ${days}, no obligation.`,

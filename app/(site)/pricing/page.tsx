@@ -70,13 +70,21 @@ export default async function PricingPage() {
       </Section>
 
       <Section>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-10 lg:gap-14 items-start">
-          <SectionHeading eyebrow="Care plans" title="Monthly hosting and" accent="maintenance" intro={settings.hostingNote} />
-          <div data-reveal-group className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {pickPackages(packages, carePlanIds).map((pkg) => (
-              <PricingCard key={pkg.id} pkg={pkg} />
-            ))}
-          </div>
+        <SectionHeading eyebrow="Care plans" title="Monthly hosting and" accent="maintenance" intro={settings.hostingNote} />
+        <div data-reveal-group className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
+          {pickPackages(packages, carePlanIds).map((pkg) => (
+            <PricingCard key={pkg.id} pkg={pkg} />
+          ))}
+        </div>
+        <div data-reveal className="mt-10 gradient-border gradient-border-light rounded-3xl bg-white p-6 sm:p-7 space-y-2 text-sm text-charcoal/85 leading-relaxed">
+          <p>
+            <strong className="text-forest">No lock-in.</strong> Cancel any time with 30 days’ notice. If you cancel, we hand over
+            your site files and help you move it to your own hosting at no charge.
+          </p>
+          <p>
+            <strong className="text-forest">Refunds:</strong> the mockup is free. The 50% deposit is refundable if you cancel before we
+            start building; once the build has started, it covers work done.
+          </p>
         </div>
       </Section>
 

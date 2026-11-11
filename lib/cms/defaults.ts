@@ -125,7 +125,7 @@ export const defaultFaqs: FaqContent = {
     {
       question: "Is there a monthly fee?",
       answer:
-        "Not for the build itself. Care plans for hosting, updates and edits are optional. Third-party costs such as your domain or a Shopify plan are paid directly to those providers.",
+        "Not for the build itself, and the first year of hosting is free. After that, hosting and care plans for updates and edits are optional. Third-party costs such as your domain or a Shopify plan are paid directly to those providers.",
     },
     { question: "Who owns the site?", answer: "You do. Once the project is paid in full, the website, its content and your domain are yours." },
     {
@@ -134,7 +134,7 @@ export const defaultFaqs: FaqContent = {
     },
     {
       question: "What if I need changes later?",
-      answer: "Care Plan Plus includes small edits every month. Without a care plan, we quote one-off changes before doing them.",
+      answer: "Care Plus includes 4 small edits a month. Without a care plan, we quote one-off changes before doing them.",
     },
     {
       question: "Do you charge in USD for international clients?",

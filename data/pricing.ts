@@ -106,28 +106,35 @@ export const defaultPackages: PricingPackage[] = [
     notIncluded: ["AI provider and automation tool subscriptions"],
   },
   {
-    id: "care-basic",
-    name: "Care Plan Basic",
-    audience: "Keep your site online, safe and up to date.",
-    priceFrom: { PKR: 5000, USD: 49 },
+    // TODO(Bilal): confirm the PKR prices of the three monthly plans (set at roughly PKR 100 per $1).
+    id: "hosting",
+    name: "Hosting only",
+    audience: "First year included with every website we build.",
+    priceFrom: { PKR: 1500, USD: 15 },
     unit: "monthly",
-    features: [
-      "Hosting for the site we built, including SSL",
-      "Regular backups",
-      "Security and software updates",
-      "Uptime monitoring",
-    ],
+    features: ["Hosting for the site we built", "SSL certificate", "Regular backups", "Uptime monitoring"],
+    deliveryDays: null,
+    revisions: null,
+    notIncluded: ["Domain renewal"],
+  },
+  {
+    id: "care-basic",
+    name: "Care Basic",
+    audience: "Keep your site online, safe and up to date.",
+    priceFrom: { PKR: 4000, USD: 39 },
+    unit: "monthly",
+    features: ["Everything in Hosting only", "Security and software updates", "A monthly check of your site"],
     deliveryDays: null,
     revisions: null,
     notIncluded: ["Domain renewal", "Shopify plan fee (Shopify hosts Shopify stores)"],
   },
   {
     id: "care-plus",
-    name: "Care Plan Plus",
+    name: "Care Plus",
     audience: "For businesses that update their site often.",
-    priceFrom: { PKR: 10000, USD: 99 },
+    priceFrom: { PKR: 8000, USD: 79 },
     unit: "monthly",
-    features: ["Everything in Basic", "4 small edits per month", "Priority support"],
+    features: ["Everything in Basic", "4 small edits a month", "Priority support"],
     deliveryDays: null,
     revisions: null,
     notIncluded: ["Domain renewal", "Shopify plan fee (Shopify hosts Shopify stores)"],
@@ -142,7 +149,7 @@ export const pickPackages = (packages: PricingPackage[], ids: string[]) =>
 // Package groups are fixed in code because services and pages refer to these ids.
 export const buildPackageIds = ["starter", "business", "shopify"]
 export const customQuoteIds = ["integrations", "ai-automation"]
-export const carePlanIds = ["care-basic", "care-plus"]
+export const carePlanIds = ["hosting", "care-basic", "care-plus"]
 
 export const defaultSettings: PricingSettings = {
   // TODO(Bilal): confirm payment terms and methods.
@@ -155,7 +162,7 @@ export const defaultSettings: PricingSettings = {
   },
   // How "hosting included" works, shown with the care plans.
   hostingNote:
-    "Hosting is included for as long as your care plan is active. It covers the website we build for you, with SSL. Shopify stores are hosted by Shopify on your Shopify plan.",
+    "The first year of hosting is free with any website we build. After that, Hosting only and both care plans include hosting with SSL. Shopify stores are hosted by Shopify on your Shopify plan.",
   priceFactors: ["Number of pages", "Number of products", "Custom features", "Integrations", "Content writing", "Rush delivery"],
   notIncludedAnywhere: [
     "Domain name fee",

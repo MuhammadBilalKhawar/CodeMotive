@@ -45,7 +45,7 @@ export const industries: Industry[] = [
     packageId: "starter",
     projectIndustries: ["restaurant", "food", "cafe"],
     faqs: [
-      { question: "Can I update menu prices myself?", answer: "Yes. We can set up simple editing for your menu and show you how to use it at handover. On Care Plan Plus, we make small edits like price changes for you each month." },
+      { question: "Can I update menu prices myself?", answer: "Yes. We can set up simple editing for your menu and show you how to use it at handover. On Care Plus, we make small edits like price changes for you each month." },
       { question: "Can customers order and pay online?", answer: "Every restaurant site includes a WhatsApp order button. Full online ordering with card or wallet payments is available as a custom quote, depending on how you handle delivery." },
       { question: "Will my restaurant show up on Google Maps?", answer: "Maps rankings come from your Google Business Profile and reviews. We link your website and profile together and make sure your name, address and hours match, which supports it." },
     ],
