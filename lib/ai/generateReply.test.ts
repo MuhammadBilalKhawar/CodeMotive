@@ -69,7 +69,7 @@ describe("generateReply", () => {
 
   it("falls back to the template when the AI invents a price", async () => {
     vi.stubEnv("GROQ_API_KEY", "test-key")
-    mockGroq("Thanks Ali! For you the Shopify store is only PKR 25,000, a special price. Bilal will email you within 24 hours.")
+    mockGroq("Thanks Ali! For you the Shopify store is only PKR 20,000, a special price. Bilal will email you within 24 hours.")
     const result = await generateReply(request("How much is a Shopify store?"), context)
     expect(result.source).toBe("template")
   })

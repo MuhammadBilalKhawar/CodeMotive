@@ -6,7 +6,7 @@ import { getPricing } from "@/lib/content"
 import { PageHero } from "@/components/page-hero"
 import { Section, SectionHeading } from "@/components/section"
 import { PricingCard } from "@/components/pricing-card"
-import { CurrencyToggle } from "@/components/price"
+import { CurrencyToggle, ExtraPrices } from "@/components/price"
 import { FaqList } from "@/components/faq-list"
 import { CtaBand } from "@/components/cta-band"
 import { JsonLd } from "@/components/json-ld"
@@ -46,6 +46,7 @@ export default async function PricingPage() {
           ))}
         </div>
         <div data-reveal className="mt-10 gradient-border gradient-border-light rounded-3xl bg-white p-6 sm:p-7 space-y-2 text-sm text-charcoal/85 leading-relaxed">
+          <ExtraPrices />
           <p>
             <strong className="text-forest">How payment works:</strong> 50% when you approve the mockup, 50% before launch. Payments by
             Payoneer or bank transfer.
@@ -57,10 +58,10 @@ export default async function PricingPage() {
 
       <Section tone="white">
         <SectionHeading
-          eyebrow="Custom quote"
+          eyebrow="Add-ons"
           title="Integrations and"
-          accent="AI automation"
-          intro="These depend on your tools and workflow, so we quote them after a short call. The quote is fixed before any work starts."
+          accent="AI assistants"
+          intro="Starting prices for a typical setup. The final price depends on your tools and workflow, and is fixed in a written quote before any work starts."
         />
         <div data-reveal-group className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {pickPackages(packages, customQuoteIds).map((pkg) => (

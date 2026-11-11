@@ -1,6 +1,6 @@
 import { siteConfig } from "@/config/site"
 import { services as codeServices, type Service } from "@/data/services"
-import { formatDelivery, formatPrice, pickPackages } from "@/data/pricing"
+import { extraPrices, formatDelivery, formatPrice, pickPackages } from "@/data/pricing"
 import { visibleProjects } from "@/data/projects"
 import type { PricingContent, PricingPackage, Project } from "@/lib/content-schema"
 import type { AiSettings, TeamContent } from "@/lib/cms/schemas"
@@ -82,6 +82,7 @@ export function buildCompanyFacts({
   lines.push(
     "",
     `PAYMENT: ${settings.paymentTerms.split}. Pakistan (PKR): ${settings.paymentTerms.methods.PKR}. International (USD): ${settings.paymentTerms.methods.USD}.`,
+    `EXTRAS: extra pages ${formatPrice(extraPrices.page.PKR, "PKR")} / ${formatPrice(extraPrices.page.USD, "USD")} each; Shopify products over 30 ${formatPrice(extraPrices.product.PKR, "PKR")} / ${formatPrice(extraPrices.product.USD, "USD")} each, free if sent as a spreadsheet.`,
     `HOSTING: ${settings.hostingNote}`,
     "CANCELLING AND REFUNDS: no lock-in; cancel hosting or care plans any time with 30 days' notice, and we hand over the site files and help move it to the client's own hosting free. The mockup is free. The 50% deposit is refundable before the build starts; after that it covers work done.",
     `WHAT AFFECTS THE PRICE: ${settings.priceFactors.join("; ")}.`,
@@ -119,6 +120,10 @@ export function allowedPrices(pricing: PricingContent) {
   for (const pkg of pricing.packages) {
     if (pkg.priceFrom.PKR !== null) allowed.PKR.add(pkg.priceFrom.PKR)
     if (pkg.priceFrom.USD !== null) allowed.USD.add(pkg.priceFrom.USD)
+  }
+  for (const extra of Object.values(extraPrices)) {
+    allowed.PKR.add(extra.PKR)
+    allowed.USD.add(extra.USD)
   }
   return allowed
 }

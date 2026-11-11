@@ -75,7 +75,8 @@ export const defaultPackages: PricingPackage[] = [
     id: "integrations",
     name: "Integrations",
     audience: "Connect your site to the tools you already use.",
-    priceFrom: { PKR: null, USD: null },
+    // TODO(Bilal): confirm the PKR prices of integrations and the AI assistant (set at roughly PKR 100 per $1).
+    priceFrom: { PKR: 15000, USD: 149 },
     unit: "one-time",
     features: [
       "Payment gateways",
@@ -91,15 +92,14 @@ export const defaultPackages: PricingPackage[] = [
   },
   {
     id: "ai-automation",
-    name: "AI Automation & Chatbots",
-    audience: "Reply to leads faster and cut repetitive work.",
-    priceFrom: { PKR: null, USD: null },
+    name: "AI Chat Assistant",
+    audience: "Answers customer questions instantly, so you don't have to.",
+    priceFrom: { PKR: 25000, USD: 249 },
     unit: "one-time",
     features: [
-      "AI chat assistant on your website",
-      "Instant AI replies to enquiries",
-      "Automatic lead tagging",
-      "Workflows with n8n, Make or Zapier",
+      "Answers from your own info: menu, prices, hours",
+      "On your website or WhatsApp",
+      "Hands over to you when needed",
     ],
     deliveryDays: null,
     revisions: null,
@@ -179,6 +179,22 @@ const numberFormat = new Intl.NumberFormat("en-US")
 
 export function formatPrice(amount: number, currency: Currency) {
   return currency === "PKR" ? `PKR ${numberFormat.format(amount)}` : `$${numberFormat.format(amount)}`
+}
+
+// Add-on prices, shown under the build packages.
+// TODO(Bilal): confirm the PKR amounts (set at roughly PKR 100 per $1).
+export const extraPrices = {
+  page: { PKR: 4000, USD: 40 },
+  product: { PKR: 100, USD: 1 },
+} satisfies Record<string, Record<Currency, number>>
+
+// Rough pounds shown next to USD prices for UK visitors: to the nearest £5,
+// or £1 under £100. Review the rate now and then.
+const GBP_PER_USD = 0.79
+
+export function aboutGbp(usd: number) {
+  const gbp = usd * GBP_PER_USD
+  return `about £${numberFormat.format(gbp < 100 ? Math.round(gbp) : Math.round(gbp / 5) * 5)}`
 }
 
 export function formatDelivery(days: [number, number]) {

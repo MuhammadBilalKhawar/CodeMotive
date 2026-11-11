@@ -78,7 +78,7 @@ const toSettingsForm = ({ settings }: PricingContent): SettingsForm => ({
 
 const groups = [
   { title: "Website & store packages", hint: "Shown on /pricing, the homepage and service pages.", ids: buildPackageIds },
-  { title: "Custom quote services", hint: "Leave both prices empty to show \"Custom quote\".", ids: customQuoteIds },
+  { title: "Integrations and AI", hint: "Leave both prices empty to show \"Custom quote\".", ids: customQuoteIds },
   { title: "Care plans", hint: "Monthly prices.", ids: carePlanIds },
 ]
 

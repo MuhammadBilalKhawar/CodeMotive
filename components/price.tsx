@@ -1,12 +1,20 @@
 "use client"
 
 import { cn } from "@/lib/utils"
-import { formatPrice, type Currency, type PricingPackage } from "@/data/pricing"
+import { aboutGbp, extraPrices, formatPrice, type Currency, type PricingPackage } from "@/data/pricing"
 import { useVisitor } from "@/components/visitor-provider"
+
+// UK visitors see USD prices with a rough pounds figure next to them.
+function useShowGbp() {
+  const { currency, country } = useVisitor()
+  return currency === "USD" && country === "GB"
+}
 
 export function PackagePrice({ pkg, className }: { pkg: PricingPackage; className?: string }) {
   const { currency } = useVisitor()
+  const showGbp = useShowGbp()
   const amount = pkg.priceFrom[currency]
+  const usd = pkg.priceFrom.USD
 
   if (amount === null) {
     return <p className={cn("font-heading font-bold text-3xl", className)}>Custom quote</p>
@@ -17,6 +25,7 @@ export function PackagePrice({ pkg, className }: { pkg: PricingPackage; classNam
       <span className="block text-sm font-medium opacity-80">Starting from</span>
       <span className="font-heading font-bold text-4xl tracking-tight">{formatPrice(amount, currency)}</span>
       {pkg.unit === "monthly" && <span className="text-base font-medium"> /month</span>}
+      {showGbp && usd !== null && <span className="text-base font-medium opacity-80"> ({aboutGbp(usd)})</span>}
     </p>
   )
 }
@@ -24,6 +33,7 @@ export function PackagePrice({ pkg, className }: { pkg: PricingPackage; classNam
 // Lowest "starting from" price across a set of packages, e.g. for a service.
 export function StartingFrom({ packages, className }: { packages: PricingPackage[]; className?: string }) {
   const { currency } = useVisitor()
+  const showGbp = useShowGbp()
   const amounts = packages.map((p) => p.priceFrom[currency]).filter((a): a is number => a !== null)
 
   if (amounts.length === 0) return <span className={className}>Custom quote</span>
@@ -33,7 +43,23 @@ export function StartingFrom({ packages, className }: { packages: PricingPackage
     <span className={className}>
       From {formatPrice(Math.min(...amounts), currency)}
       {monthly && "/month"}
+      {showGbp && <span className="text-[0.5em] font-medium opacity-80"> ({aboutGbp(Math.min(...amounts))})</span>}
     </span>
+  )
+}
+
+export function ExtraPrices({ className }: { className?: string }) {
+  const { currency } = useVisitor()
+  const showGbp = useShowGbp()
+  const price = (amounts: Record<Currency, number>) =>
+    formatPrice(amounts[currency], currency) + (showGbp ? ` (${aboutGbp(amounts.USD)})` : "")
+
+  return (
+    <p className={className}>
+      <strong className="text-forest">Extra pages:</strong> {price(extraPrices.page)} each.{" "}
+      <strong className="text-forest">Extra Shopify products over 30:</strong> {price(extraPrices.product)} each, or free if you send
+      them as a spreadsheet.
+    </p>
   )
 }
 

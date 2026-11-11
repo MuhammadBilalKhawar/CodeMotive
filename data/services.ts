@@ -134,14 +134,14 @@ export const services: Service[] = [
           "Yes. Subscriptions for tools like HubSpot, Mailchimp or the WhatsApp Business API are billed by those companies directly. Many have free plans that are enough to start.",
       },
       {
-        question: "Why is this a custom quote?",
+        question: "Why is the price a starting price?",
         answer:
-          "Each integration depends on your tools and how you work. After a short call we send a fixed quote for exactly what you need.",
+          "Each integration depends on your tools and how you work. The starting price covers a typical setup; after a short call we send a fixed quote for exactly what you need.",
       },
     ],
     metaTitle: "Integrations: WhatsApp, Payments & Booking",
     metaDescription:
-      "Connect your website to WhatsApp, payments, booking calendars, HubSpot or Zoho CRM and email. Custom quote after a free call.",
+      "Connect your website to WhatsApp, payments, booking calendars, HubSpot or Zoho CRM and email. Fixed quote after a free call.",
   },
   {
     slug: "ai-automation",
@@ -179,7 +179,7 @@ export const services: Service[] = [
     ],
     metaTitle: "AI Chatbots & Automation for Small Businesses",
     metaDescription:
-      "AI chat assistants, instant replies to enquiries, lead tagging and n8n, Make or Zapier workflows for small businesses. Custom quote.",
+      "AI chat assistants, instant replies to enquiries, lead tagging and n8n, Make or Zapier workflows for small businesses. Fixed quote.",
   },
   {
     slug: "care-plans",
