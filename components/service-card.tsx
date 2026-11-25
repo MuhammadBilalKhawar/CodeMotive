@@ -60,6 +60,7 @@ export function ServiceCard({ service, packages, variant = "default", className 
       <p className="mt-auto">
         <StartingFrom
           packages={pickPackages(packages, service.packageIds)}
+          serviceSlug={service.slug}
           className="inline-flex text-sm font-semibold text-forest bg-mint/50 border border-sage/20 rounded-full px-3.5 py-1.5"
         />
       </p>

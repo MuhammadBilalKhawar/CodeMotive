@@ -6,7 +6,8 @@ import { getPricing } from "@/lib/content"
 import { PageHero } from "@/components/page-hero"
 import { Section, SectionHeading } from "@/components/section"
 import { PricingCard } from "@/components/pricing-card"
-import { CurrencyToggle, ExtraPrices } from "@/components/price"
+import { CurrencyToggle, ExtraPrices, MarketSwitch } from "@/components/price"
+import { UkPricingSections } from "@/components/uk-pricing"
 import { FaqList } from "@/components/faq-list"
 import { CtaBand } from "@/components/cta-band"
 import { JsonLd } from "@/components/json-ld"
@@ -38,6 +39,7 @@ export default async function PricingPage() {
         <CurrencyToggle />
       </PageHero>
 
+      <MarketSwitch gbp={<UkPricingSections />}>
       <Section>
         <SectionHeading eyebrow="Packages" title="Websites and" accent="online stores" />
         <div data-reveal-group className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6 pt-4">
@@ -121,6 +123,7 @@ export default async function PricingPage() {
           <FaqList items={faqs} />
         </div>
       </Section>
+      </MarketSwitch>
 
       <CtaBand title="Not sure which one?" text="Tell us about your business and we'll recommend the right package." />
     </>

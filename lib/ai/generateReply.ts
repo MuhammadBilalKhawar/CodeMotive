@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai"
 import { getEnv } from "@/lib/env"
 import { siteConfig } from "@/config/site"
-import type { Currency } from "@/lib/content-schema"
+import type { Market } from "@/data/pricing-uk"
 import { chatSystemPrompt, contactSystemPrompt, mockupSystemPrompt } from "@/lib/ai/prompt"
 import { cleanReply, isReplySafe } from "@/lib/ai/safety"
 
@@ -23,7 +23,7 @@ const defaultTemplateSite: TemplateSite = { whatsappUrl: siteConfig.whatsapp.url
 export type ReplyContext = {
   facts: string
   site?: TemplateSite
-  allowedPrices: Record<Currency, Set<number>>
+  allowedPrices: Record<Market, Set<number>>
 }
 
 export type ReplySource = "groq" | "gemini" | "template"
@@ -127,7 +127,7 @@ export async function generateReply(request: ReplyRequest, context: ReplyContext
 export async function generateChatReply(
   messages: ChatMessage[],
   context: ReplyContext,
-  currency: Currency,
+  currency: Market,
 ): Promise<{ reply: string; source: ReplySource }> {
   return (await askProviders(chatSystemPrompt(context.facts, currency), messages, context, 2)) ?? { reply: chatFallbackReply, source: "template" }
 }

@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { defaultPricing } from "@/data/pricing"
 import { defaultProjects } from "@/data/projects"
 import { chatFallbackReply } from "@/lib/ai/generateReply"
+import { formatGbp, ukCarePlans, ukCustomProject, ukExtras, ukPlans, ukTerms } from "@/data/pricing-uk"
 // vi.mock calls below are hoisted above this import by Vitest.
 import { POST } from "@/app/api/chat/route"
 
@@ -69,6 +70,30 @@ describe("POST /api/chat", () => {
     expect(sent[0].role).toBe("system")
     expect(sent[0].content).toContain("in PKR unless the visitor asks")
     expect(sent.slice(1).map((m) => m.role)).toEqual(["user", "assistant", "user"])
+  })
+
+  it("in the UK market, gives the model the GBP figures and terms from the data file", async () => {
+    vi.stubEnv("GROQ_API_KEY", "test-key")
+    const calls = mockGroq("The Starter website is from £595.")
+    const res = await post({ messages: [{ role: "user", content: "How much is a website?" }], market: "GBP" })
+    expect((await res.json()).reply).toBe("The Starter website is from £595.")
+    const system = calls[0].messages[0].content
+    expect(system).toContain("in GBP unless the visitor asks")
+    for (const offer of [...ukPlans, ...ukExtras]) expect(system).toContain(`${offer.name}: from ${formatGbp(offer.from)}`)
+    for (const plan of ukCarePlans) expect(system).toContain(`${plan.name}: ${formatGbp(plan.from)}/month`)
+    expect(system).toContain(`${ukCustomProject.name}: from ${formatGbp(ukCustomProject.from)}, ${ukCustomProject.note}`)
+    ukTerms.forEach((term) => expect(system).toContain(term))
+    // The PKR/USD price list and terms are not sent in the UK market.
+    expect(system).not.toContain("PACKAGES AND STARTING PRICES")
+    expect(system).not.toContain("Payoneer, Wise or bank transfer")
+  })
+
+  it("in the UK market, discards a reply with a price that isn't in the data file", async () => {
+    vi.stubEnv("GROQ_API_KEY", "test-key")
+    vi.spyOn(console, "warn").mockImplementation(() => {})
+    mockGroq("For you it's only £300.")
+    const res = await post({ messages: [{ role: "user", content: "Cheaper?" }], market: "GBP" })
+    expect((await res.json()).reply).toBe(chatFallbackReply)
   })
 
   it("never shows an invented price or discount", async () => {

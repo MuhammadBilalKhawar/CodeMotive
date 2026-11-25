@@ -51,7 +51,7 @@ function loadHistory(greeting: string): Message[] {
 type ChatPanelProps = { open: boolean; onClose: () => void; greeting: string; suggestions: string[] }
 
 export function ChatPanel({ open, onClose, greeting, suggestions }: ChatPanelProps) {
-  const { currency } = useVisitor()
+  const { market } = useVisitor()
   const { whatsappUrl } = useSiteContact()
   const [messages, setMessages] = useState<Message[]>(() => loadHistory(greeting))
   const [input, setInput] = useState("")
@@ -98,7 +98,7 @@ export function ChatPanel({ open, onClose, greeting, suggestions }: ChatPanelPro
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: conversation.slice(-20), currency }),
+        body: JSON.stringify({ messages: conversation.slice(-20), market }),
       })
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; reply?: string; error?: string }
       if (res.ok && data.reply) {

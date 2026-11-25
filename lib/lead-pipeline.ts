@@ -2,6 +2,7 @@ import { after } from "next/server"
 import { getPricing, getProjects } from "@/lib/content"
 import { getAiSettings, getFaqs, getServices, getSite, getTeam } from "@/lib/cms"
 import { allowedPrices, buildCompanyFacts } from "@/lib/ai/knowledge"
+import type { Market } from "@/data/pricing-uk"
 import { generateReply, templateReply, type ReplyContext, type ReplyRequest } from "@/lib/ai/generateReply"
 import { verifyTurnstile } from "@/lib/turnstile"
 import { isRateLimited } from "@/lib/rate-limit"
@@ -38,7 +39,7 @@ export function countryName(code: string) {
 }
 
 // Company facts and allowed prices for the AI, from the live content; null if it can't be loaded.
-export async function loadReplyContext(): Promise<ReplyContext | null> {
+export async function loadReplyContext(market?: Market): Promise<ReplyContext | null> {
   try {
     const [pricing, projects, site, team, services, faqs, ai] = await Promise.all([
       getPricing(),
@@ -50,7 +51,7 @@ export async function loadReplyContext(): Promise<ReplyContext | null> {
       getAiSettings(),
     ])
     return {
-      facts: buildCompanyFacts({ pricing, projects, site, team, services, faqs, ai }),
+      facts: buildCompanyFacts({ pricing, projects, site, team, services, faqs, ai, market }),
       allowedPrices: allowedPrices(pricing),
       site: { whatsappUrl: site.whatsappUrl, mockupDays: site.mockupDays },
     }

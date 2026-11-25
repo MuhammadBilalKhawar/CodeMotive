@@ -1,4 +1,4 @@
-import type { Currency } from "@/lib/content-schema"
+import type { Market } from "@/data/pricing-uk"
 
 const MAX_REPLY_CHARS = 1400
 
@@ -24,13 +24,15 @@ const toNumber = (digits: string, suffix?: string) => {
 // Finds every money amount in the reply, e.g. "PKR 35,000", "Rs. 35k",
 // "35,000 rupees", "$299", "299 USD".
 export function extractMoney(text: string) {
-  const found: { currency: Currency; amount: number }[] = []
+  const found: { currency: Market; amount: number }[] = []
   const amount = String.raw`(\d[\d,]*(?:\.\d+)?)\s?(k|thousand)?\b`
-  const patterns: [RegExp, Currency][] = [
+  const patterns: [RegExp, Market][] = [
     [new RegExp(String.raw`(?:\bPKR|\bRs\.?|₨)\s?${amount}`, "gi"), "PKR"],
     [new RegExp(String.raw`(\d[\d,]*(?:\.\d+)?)\s?(k|thousand)?\s?(?:PKR\b|rupees\b|روپے)`, "gi"), "PKR"],
     [new RegExp(String.raw`(?:US\$|\$|\bUSD)\s?${amount}`, "gi"), "USD"],
     [new RegExp(String.raw`(\d[\d,]*(?:\.\d+)?)\s?(k|thousand)?\s?(?:USD\b|dollars\b)`, "gi"), "USD"],
+    [new RegExp(String.raw`(?:£|\bGBP)\s?${amount}`, "gi"), "GBP"],
+    [new RegExp(String.raw`(\d[\d,]*(?:\.\d+)?)\s?(k|thousand)?\s?(?:GBP\b|pounds\b)`, "gi"), "GBP"],
   ]
   for (const [regex, currency] of patterns) {
     for (const match of text.matchAll(regex)) found.push({ currency, amount: toNumber(match[1], match[2]) })
@@ -41,7 +43,7 @@ export function extractMoney(text: string) {
 // A reply is only used if every price in it is a published starting price for
 // that currency, and every percentage appears in the company facts (e.g. the
 // 50% payment split). This blocks invented prices and "90% off" style replies.
-export function isReplySafe(reply: string, allowed: Record<Currency, Set<number>>, facts: string) {
+export function isReplySafe(reply: string, allowed: Record<Market, Set<number>>, facts: string) {
   for (const { currency, amount } of extractMoney(reply)) {
     if (!allowed[currency].has(amount)) return false
   }

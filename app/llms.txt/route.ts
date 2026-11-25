@@ -1,5 +1,6 @@
 import { siteConfig } from "@/config/site"
 import { formatDelivery, formatPrice, pickPackages } from "@/data/pricing"
+import { ukPricingLines } from "@/data/pricing-uk"
 import { visibleProjects } from "@/data/projects"
 import { getPricing, getProjects } from "@/lib/content"
 import { getAiSettings, getIndustries, getPublishedPosts, getServices, getSite } from "@/lib/cms"
@@ -32,7 +33,7 @@ export async function GET() {
     "",
     `> ${site.summary}`,
     "",
-    `${siteConfig.name} (${site.tagline}) is based in ${site.fullAddress} and works with clients in Pakistan and worldwide, remotely over WhatsApp, email and video calls. Every project gets a fixed written quote with scope, price and timeline before work starts. ${site.deliveryPromise} Prices are in PKR for Pakistan and USD for international clients.`,
+    `${siteConfig.name} (${site.tagline}) is based in ${site.fullAddress} and works with clients in Pakistan and worldwide, remotely over WhatsApp, email and video calls. Every project gets a fixed written quote with scope, price and timeline before work starts. ${site.deliveryPromise} Prices are in PKR for Pakistan, USD for international clients and GBP for UK clients.`,
     "",
     "## Services",
     "",
@@ -53,6 +54,10 @@ export async function GET() {
     `Not included in any package: ${settings.notIncludedAnywhere.join("; ")}.`,
     ...(ai.notOffered.length ? [`Not offered right now: ${ai.notOffered.join("; ")}. All websites and stores are mobile-first.`] : []),
     `Full pricing: ${absoluteUrl("/pricing")}`,
+    "",
+    "## UK pricing (GBP)",
+    "",
+    ...ukPricingLines(),
     "",
     "## Industries",
     "",

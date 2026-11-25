@@ -188,15 +188,6 @@ export const extraPrices = {
   product: { PKR: 100, USD: 1 },
 } satisfies Record<string, Record<Currency, number>>
 
-// Rough pounds shown next to USD prices for UK visitors: to the nearest £5,
-// or £1 under £100. Review the rate now and then.
-const GBP_PER_USD = 0.79
-
-export function aboutGbp(usd: number) {
-  const gbp = usd * GBP_PER_USD
-  return `about £${numberFormat.format(gbp < 100 ? Math.round(gbp) : Math.round(gbp / 5) * 5)}`
-}
-
 export function formatDelivery(days: [number, number]) {
   const [min, max] = days
   if (max < 14) return `${min}–${max} days`

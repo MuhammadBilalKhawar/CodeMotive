@@ -9,7 +9,9 @@ import { getPricing, getProjects } from "@/lib/content"
 import { PageHero } from "@/components/page-hero"
 import { Section, SectionHeading } from "@/components/section"
 import { PricingCard } from "@/components/pricing-card"
-import { StartingFrom } from "@/components/price"
+import { MarketSwitch, StartingFrom } from "@/components/price"
+import { UkServiceOffers } from "@/components/uk-pricing"
+import { ukServices } from "@/data/pricing-uk"
 import { ProjectCard } from "@/components/project-card"
 import { FaqList } from "@/components/faq-list"
 import { CtaBand } from "@/components/cta-band"
@@ -85,17 +87,19 @@ export default async function ServicePage({ params }: Props) {
                 <Tag className="w-5 h-5 mt-1 shrink-0 text-sage" aria-hidden />
                 <div>
                   <p className="text-sm font-medium text-mint">Price</p>
-                  <StartingFrom packages={pkgs} className="font-heading font-bold text-3xl text-white" />
+                  <StartingFrom packages={pkgs} serviceSlug={service.slug} className="font-heading font-bold text-3xl text-white" />
                   {!hasPublishedPrice && <p className="text-sm text-mint mt-1">Fixed quote after a free call.</p>}
                 </div>
               </div>
-              <div className="flex gap-4">
-                <Clock className="w-5 h-5 mt-1 shrink-0 text-sage" aria-hidden />
-                <div>
-                  <p className="text-sm font-medium text-mint">Timeline</p>
-                  <p className="text-white font-semibold">{service.timeline}</p>
+              <MarketSwitch gbp={null}>
+                <div className="flex gap-4">
+                  <Clock className="w-5 h-5 mt-1 shrink-0 text-sage" aria-hidden />
+                  <div>
+                    <p className="text-sm font-medium text-mint">Timeline</p>
+                    <p className="text-white font-semibold">{service.timeline}</p>
+                  </div>
                 </div>
-              </div>
+              </MarketSwitch>
             </div>
           </aside>
         </div>
@@ -104,14 +108,16 @@ export default async function ServicePage({ params }: Props) {
       {hasPublishedPrice && (
         <Section tone="white">
           <SectionHeading eyebrow="Packages" title={service.name} accent="pricing" />
-          <div
-            data-reveal-group
-            className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6 pt-4 ${pkgs.length > 2 ? "lg:grid-cols-3" : "max-w-4xl"}`}
-          >
-            {pkgs.map((pkg) => (
-              <PricingCard key={pkg.id} pkg={pkg} />
-            ))}
-          </div>
+          <MarketSwitch gbp={ukServices[service.slug] ? <UkServiceOffers offers={ukServices[service.slug].offers} /> : null}>
+            <div
+              data-reveal-group
+              className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-6 pt-4 ${pkgs.length > 2 ? "lg:grid-cols-3" : "max-w-4xl"}`}
+            >
+              {pkgs.map((pkg) => (
+                <PricingCard key={pkg.id} pkg={pkg} />
+              ))}
+            </div>
+          </MarketSwitch>
         </Section>
       )}
 

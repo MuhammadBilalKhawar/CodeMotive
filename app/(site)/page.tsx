@@ -12,7 +12,8 @@ import { Section, SectionHeading, buttonStyles } from "@/components/section"
 import { ServiceCard } from "@/components/service-card"
 import { ProjectCard } from "@/components/project-card"
 import { PricingCard } from "@/components/pricing-card"
-import { CurrencyToggle } from "@/components/price"
+import { CurrencyToggle, MarketSwitch } from "@/components/price"
+import { UkHomePricing } from "@/components/uk-pricing"
 import { FounderCard } from "@/components/founder-card"
 import { FaqList } from "@/components/faq-list"
 import { JsonLd } from "@/components/json-ld"
@@ -152,11 +153,13 @@ export default async function Home() {
           />
           <CurrencyToggle className="w-fit" />
         </div>
-        <div data-reveal-group className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6 pt-4 items-stretch">
-          {pickPackages(packages, buildPackageIds).map((pkg) => (
-            <PricingCard key={pkg.id} pkg={pkg} compact />
-          ))}
-        </div>
+        <MarketSwitch gbp={<UkHomePricing />}>
+          <div data-reveal-group className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6 pt-4 items-stretch">
+            {pickPackages(packages, buildPackageIds).map((pkg) => (
+              <PricingCard key={pkg.id} pkg={pkg} compact />
+            ))}
+          </div>
+        </MarketSwitch>
         <Link href="/pricing" className="group mt-10 inline-flex items-center gap-1.5 font-semibold text-forest hover:text-sage-600">
           See all prices, care plans and what&apos;s included
           <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" aria-hidden />

@@ -21,7 +21,7 @@ export default defineConfig({
   },
   projects: [
     { name: "mobile", testMatch: /mobile\.spec\.ts/, use: { ...devices["Pixel 7"], channel: "chrome" } },
-    { name: "desktop", testMatch: /desktop\.spec\.ts/, use: { ...devices["Desktop Chrome"], channel: "chrome" } },
+    { name: "desktop", testMatch: /(desktop|uk-pricing)\.spec\.ts/, use: { ...devices["Desktop Chrome"], channel: "chrome" } },
   ],
   webServer: {
     command: `npx next build && npx next start -p ${PORT}`,

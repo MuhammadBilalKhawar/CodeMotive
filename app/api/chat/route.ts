@@ -21,7 +21,9 @@ const chatSchema = z.object({
     .min(1)
     .max(20)
     .refine((m) => m.length > 0 && m[m.length - 1].role === "user", "The last message must be from the visitor"),
-  currency: z.enum(["PKR", "USD"]).default("USD"),
+  // "currency" is the older name for the same field.
+  market: z.enum(["PKR", "USD", "GBP"]).optional(),
+  currency: z.enum(["PKR", "USD", "GBP"]).optional(),
 })
 
 export async function POST(request: Request) {
@@ -41,11 +43,12 @@ export async function POST(request: Request) {
 
   if (!(await getAiSettings().catch(() => null))?.chatEnabled) return jsonError(503, "The chat is switched off right now. Please use the contact form or WhatsApp.")
 
-  const context = await loadReplyContext()
+  const market = parsed.data.market ?? parsed.data.currency ?? "USD"
+  const context = await loadReplyContext(market)
   if (!context) return Response.json({ ok: true, reply: chatFallbackReply })
 
   const messages = parsed.data.messages.slice(-MAX_TURNS_SENT)
-  const { reply, source } = await generateChatReply(messages, context, parsed.data.currency)
+  const { reply, source } = await generateChatReply(messages, context, market)
   // "template" means no AI answer passed the safety check: worth a look in the admin.
   await saveChatQuestion(messages[messages.length - 1].content, source !== "template").catch((error) => console.error("[chat] Couldn't save the question", error))
   return Response.json({ ok: true, reply })

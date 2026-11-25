@@ -1,6 +1,7 @@
 import { siteConfig } from "@/config/site"
 import { services as codeServices, type Service } from "@/data/services"
 import { extraPrices, formatDelivery, formatPrice, pickPackages } from "@/data/pricing"
+import { ukAllowedPrices, ukPricingLines, type Market } from "@/data/pricing-uk"
 import { visibleProjects } from "@/data/projects"
 import type { PricingContent, PricingPackage, Project } from "@/lib/content-schema"
 import type { AiSettings, TeamContent } from "@/lib/cms/schemas"
@@ -30,6 +31,8 @@ type FactsInput = {
   services?: Service[]
   faqs?: FilledFaqs
   ai?: AiSettings
+  // The visitor's market. In the UK market the pricing sections come from data/pricing-uk.ts.
+  market?: Market
 }
 
 export function buildCompanyFacts({
@@ -40,7 +43,9 @@ export function buildCompanyFacts({
   services = codeServices,
   faqs = fillFaqs(defaultFaqs, site, pricing.settings),
   ai = defaultAi,
+  market,
 }: FactsInput) {
+  const uk = market === "GBP"
   const { packages, settings } = pricing
   const lines: string[] = []
   const days = `${site.mockupDays} working day${site.mockupDays === 1 ? "" : "s"}`
@@ -50,7 +55,9 @@ export function buildCompanyFacts({
     `Location: ${site.fullAddress}. Works with clients in Pakistan and internationally (remote: WhatsApp, email, video calls).`,
     `Contact: email ${site.email}, WhatsApp ${site.whatsappDisplay}. ${site.replyPromise}`,
     `Founders: ${team.map((f) => `${f.name}, ${f.role}, ${f.experience} (${f.skills.join(", ")})`).join("; ")}.`,
-    `Delivery: ${site.deliveryPromise} Every project gets a written fixed quote with scope, price and timeline before work starts. Weekly progress updates.`,
+    uk
+      ? "Every project gets a written fixed quote with scope, price and timeline before work starts. Weekly progress updates."
+      : `Delivery: ${site.deliveryPromise} Every project gets a written fixed quote with scope, price and timeline before work starts. Weekly progress updates.`,
     "",
     "SERVICES:",
   )
@@ -58,37 +65,43 @@ export function buildCompanyFacts({
     const prices = pickPackages(packages, service.packageIds)
     const published = prices.filter((p) => p.priceFrom.PKR !== null || p.priceFrom.USD !== null)
     lines.push(
-      `- ${service.name}: ${service.short} Includes: ${service.included.join("; ")}. Timeline: ${service.timeline}` +
-        (published.length ? "" : " Price: custom quote after a free call."),
+      uk
+        ? `- ${service.name}: ${service.short} Includes: ${service.included.join("; ")}.`
+        : `- ${service.name}: ${service.short} Includes: ${service.included.join("; ")}. Timeline: ${service.timeline}` +
+            (published.length ? "" : " Price: custom quote after a free call."),
     )
   }
 
-  lines.push("", "PACKAGES AND STARTING PRICES (PKR for Pakistan, USD for everyone else):")
-  for (const pkg of packages) {
-    const customQuote = pkg.priceFrom.PKR === null && pkg.priceFrom.USD === null
-    // Custom-quote packages repeat their service's list above, so keep them short.
-    if (customQuote) {
-      lines.push(`- ${pkg.name}: ${priceLine(pkg)}.`)
-      continue
+  if (uk) {
+    lines.push("", ...ukPricingLines())
+  } else {
+    lines.push("", "PACKAGES AND STARTING PRICES (PKR for Pakistan, USD for everyone else):")
+    for (const pkg of packages) {
+      const customQuote = pkg.priceFrom.PKR === null && pkg.priceFrom.USD === null
+      // Custom-quote packages repeat their service's list above, so keep them short.
+      if (customQuote) {
+        lines.push(`- ${pkg.name}: ${priceLine(pkg)}.`)
+        continue
+      }
+      const delivery = pkg.deliveryDays ? ` Delivery ${formatDelivery(pkg.deliveryDays)}.` : ""
+      const revisions = pkg.revisions !== null ? ` ${pkg.revisions} revision rounds.` : ""
+      lines.push(
+        `- ${pkg.name}: ${priceLine(pkg)}. For: ${pkg.audience} Includes: ${pkg.features.join("; ")}.${delivery}${revisions}` +
+          (pkg.notIncluded.length ? ` Not included: ${pkg.notIncluded.join("; ")}.` : ""),
+      )
     }
-    const delivery = pkg.deliveryDays ? ` Delivery ${formatDelivery(pkg.deliveryDays)}.` : ""
-    const revisions = pkg.revisions !== null ? ` ${pkg.revisions} revision rounds.` : ""
+
     lines.push(
-      `- ${pkg.name}: ${priceLine(pkg)}. For: ${pkg.audience} Includes: ${pkg.features.join("; ")}.${delivery}${revisions}` +
-        (pkg.notIncluded.length ? ` Not included: ${pkg.notIncluded.join("; ")}.` : ""),
+      "",
+      `PAYMENT: ${settings.paymentTerms.split}. Pakistan (PKR): ${settings.paymentTerms.methods.PKR}. International (USD): ${settings.paymentTerms.methods.USD}.`,
+      `EXTRAS: extra pages ${formatPrice(extraPrices.page.PKR, "PKR")} / ${formatPrice(extraPrices.page.USD, "USD")} each; Shopify products over 30 ${formatPrice(extraPrices.product.PKR, "PKR")} / ${formatPrice(extraPrices.product.USD, "USD")} each, free if sent as a spreadsheet.`,
+      `HOSTING: ${settings.hostingNote}`,
+      "CANCELLING AND REFUNDS: no lock-in; cancel hosting or care plans any time with 30 days' notice, and we hand over the site files and help move it to the client's own hosting free. The mockup is free. The 50% deposit is refundable before the build starts; after that it covers work done.",
+      `WHAT AFFECTS THE PRICE: ${settings.priceFactors.join("; ")}.`,
+      `NOT INCLUDED IN ANY PACKAGE: ${settings.notIncludedAnywhere.join("; ")}.`,
     )
   }
-
-  lines.push(
-    "",
-    `PAYMENT: ${settings.paymentTerms.split}. Pakistan (PKR): ${settings.paymentTerms.methods.PKR}. International (USD): ${settings.paymentTerms.methods.USD}.`,
-    `EXTRAS: extra pages ${formatPrice(extraPrices.page.PKR, "PKR")} / ${formatPrice(extraPrices.page.USD, "USD")} each; Shopify products over 30 ${formatPrice(extraPrices.product.PKR, "PKR")} / ${formatPrice(extraPrices.product.USD, "USD")} each, free if sent as a spreadsheet.`,
-    `HOSTING: ${settings.hostingNote}`,
-    "CANCELLING AND REFUNDS: no lock-in; cancel hosting or care plans any time with 30 days' notice, and we hand over the site files and help move it to the client's own hosting free. The mockup is free. The 50% deposit is refundable before the build starts; after that it covers work done.",
-    `WHAT AFFECTS THE PRICE: ${settings.priceFactors.join("; ")}.`,
-    `NOT INCLUDED IN ANY PACKAGE: ${settings.notIncludedAnywhere.join("; ")}.`,
-    `FREE HOMEPAGE MOCKUP: businesses can request a free homepage mockup at ${siteConfig.url}/free-mockup; delivered within ${days}, no obligation.`,
-  )
+  lines.push(`FREE HOMEPAGE MOCKUP: businesses can request a free homepage mockup at ${siteConfig.url}/free-mockup; delivered within ${days}, no obligation.`)
   if (ai.notOffered.length) {
     lines.push(`NOT OFFERED RIGHT NOW: ${ai.notOffered.join("; ")}. Every website and store we build is mobile-first and works well on phones.`)
   }
@@ -106,17 +119,20 @@ export function buildCompanyFacts({
     }
   }
 
-  lines.push("", "FAQ:")
-  for (const faq of [...faqs.general, ...faqs.pricing]) {
-    lines.push(`Q: ${faq.question} A: ${faq.answer}`)
+  // The general and pricing FAQs quote PKR/USD terms, so the UK facts leave them out.
+  if (!uk) {
+    lines.push("", "FAQ:")
+    for (const faq of [...faqs.general, ...faqs.pricing]) {
+      lines.push(`Q: ${faq.question} A: ${faq.answer}`)
+    }
   }
 
   return lines.join("\n")
 }
 
 // Every money amount that may appear in a reply, per currency.
-export function allowedPrices(pricing: PricingContent) {
-  const allowed = { PKR: new Set<number>(), USD: new Set<number>() }
+export function allowedPrices(pricing: PricingContent): Record<Market, Set<number>> {
+  const allowed = { PKR: new Set<number>(), USD: new Set<number>(), GBP: ukAllowedPrices() }
   for (const pkg of pricing.packages) {
     if (pkg.priceFrom.PKR !== null) allowed.PKR.add(pkg.priceFrom.PKR)
     if (pkg.priceFrom.USD !== null) allowed.USD.add(pkg.priceFrom.USD)
