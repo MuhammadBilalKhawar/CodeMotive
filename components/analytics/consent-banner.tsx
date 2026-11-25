@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Cookie } from "lucide-react"
-import { CONSENT_KEY, gaId } from "@/components/analytics/google-analytics"
+import { CONSENT_KEY, gaId, gtmId } from "@/components/analytics/google-analytics"
 
 const OPEN_EVENT = "cm-open-consent"
 
@@ -22,7 +22,7 @@ export function ConsentBanner() {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    if (!gaId) return
+    if (!gaId && !gtmId) return
     let stored: string | null = null
     try {
       stored = localStorage.getItem(CONSENT_KEY)
@@ -68,7 +68,7 @@ export function ConsentBanner() {
 
 // Footer link to change the choice later.
 export function CookieSettingsButton({ className }: { className?: string }) {
-  if (!gaId) return null
+  if (!gaId && !gtmId) return null
   return (
     <button type="button" className={className} onClick={() => window.dispatchEvent(new Event(OPEN_EVENT))}>
       Cookie settings
